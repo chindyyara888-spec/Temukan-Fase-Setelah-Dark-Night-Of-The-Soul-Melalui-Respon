@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#11100f">
+<title>Temukan Fase Dirimu Setelah Dark Night Of The Soul</title>
+<style>
+:root {
+  --bg:#0d0c0b; --card:rgba(28,25,22,.88); --card2:rgba(40,35,30,.72);
+  --text:#f2eee8; --muted:#b9afa4; --gold:#d6b47a; --gold2:#a8895d;
+  --line:rgba(214,180,122,.18); --shadow:0 24px 70px rgba(0,0,0,.38);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0; min-height:100vh; color:var(--text);
+ font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ background:
+ radial-gradient(circle at 50% -10%,rgba(196,154,91,.15),transparent 35%),
+ radial-gradient(circle at 10% 70%,rgba(120,91,54,.08),transparent 30%),
+ linear-gradient(145deg,#0b0a09,#15120f 55%,#0c0b0a);
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(rgba(255,255,255,.08) .6px,transparent .6px);background-size:5px 5px;mix-blend-mode:soft-light}
+.container{width:min(760px,calc(100% - 28px));margin:auto;padding:28px 0 34px}
+.hero{text-align:center;padding:34px 12px 24px}
+.kicker{letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-size:11px;font-weight:700}
+h1{font-family:Georgia,serif;font-weight:500;font-size:clamp(29px,7vw,52px);line-height:1.08;margin:16px auto 14px;max-width:680px}
+.subtitle{color:var(--muted);line-height:1.65;font-size:14px;max-width:590px;margin:auto}
+.card{background:linear-gradient(145deg,rgba(35,31,27,.92),rgba(18,16,14,.92));border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);backdrop-filter:blur(14px)}
+.intro{padding:26px;margin-top:8px}
+.intro h2,.result h2{font-family:Georgia,serif;font-weight:500;margin:0 0 10px}
+.intro p{color:var(--muted);line-height:1.75;font-size:14px;margin:8px 0}
+.phase-pills{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 2px;justify-content:center}
+.pill{border:1px solid var(--line);color:#d8cfc5;padding:7px 11px;border-radius:999px;font-size:12px;background:rgba(255,255,255,.025)}
+button{font:inherit}
+.primary{width:100%;border:0;border-radius:15px;padding:15px 18px;background:linear-gradient(135deg,#d7b57b,#a88759);color:#17120d;font-weight:800;cursor:pointer;box-shadow:0 10px 30px rgba(180,140,75,.18);transition:.2s}
+.primary:hover{transform:translateY(-1px);filter:brightness(1.05)}
+.quiz{display:none;margin-top:18px}
+.quiz-head{padding:20px 22px 0}
+.progress-row{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:9px}
+.progress{height:5px;background:#28231f;border-radius:9px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));transition:.3s}
+.question-card{padding:24px;margin-top:14px}
+.question-number{color:var(--gold);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.question{font-family:Georgia,serif;font-size:22px;line-height:1.35;margin:12px 0 20px}
+.options{display:grid;gap:11px}
+.option{position:relative;display:flex;gap:13px;align-items:flex-start;padding:15px;border:1px solid rgba(214,180,122,.15);background:rgba(255,255,255,.025);border-radius:16px;cursor:pointer;transition:.2s}
+.option:hover{border-color:rgba(214,180,122,.42);background:rgba(214,180,122,.06)}
+.option.selected{border-color:var(--gold);background:rgba(214,180,122,.11);box-shadow:inset 0 0 0 1px rgba(214,180,122,.12)}
+.option input{position:absolute;opacity:0;pointer-events:none}
+.letter{min-width:29px;height:29px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--gold);font-size:12px;font-weight:800}
+.option.selected .letter{background:var(--gold);color:#17120d}
+.option-text{font-size:14px;line-height:1.55;color:#e7e0d7}
+.nav{display:flex;gap:10px;margin-top:17px}
+.secondary{flex:1;border:1px solid var(--line);background:rgba(255,255,255,.035);color:#ddd3c8;border-radius:14px;padding:13px;cursor:pointer}
+.nav .primary{flex:2}
+.secondary:disabled{opacity:.35;cursor:not-allowed}
+.result{display:none;padding:26px;margin-top:18px}
+.result-badge{font-size:42px;margin-bottom:5px}
+.result-label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:800}
+.result-title{font-family:Georgia,serif;font-size:32px;margin:7px 0 22px}
+.result-text{color:#ddd5cc;font-size:14px;line-height:1.78}
+.result-text p{margin:0 0 15px}
+.scores{margin:25px 0}
+.score-row{margin:14px 0}
+.score-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:7px}
+.bar{height:8px;background:#28231f;border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;background:linear-gradient(90deg,#8d714b,#d8b77b);border-radius:99px;transition:width .8s ease}
+.support{padding:17px;border:1px solid var(--line);border-radius:17px;background:rgba(214,180,122,.045);margin:20px 0;color:#cfc5ba;font-size:13px;line-height:1.65}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.actions button{width:100%}
+.disclaimer{color:#9f958b;font-size:11px;line-height:1.6;text-align:center;margin:20px 0 0}
+.brand{text-align:center;padding:34px 0 5px;color:#d2b27b;letter-spacing:.2em;font-size:12px;text-transform:uppercase}
+.infinity{font-family:Georgia,serif;font-size:32px;line-height:1;margin-bottom:7px;letter-spacing:0}
+.hidden{display:none!important}
+@media(max-width:520px){
+ .container{width:min(100% - 18px,760px);padding-top:14px}
+ .hero{padding-top:24px}
+ .question-card,.result,.intro{padding:20px}
+ .question{font-size:20px}
+ .actions{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main class="container">
+<section class="hero">
+<div class="kicker">Reflektif Self-Discovery</div>
+<h1>Temukan Fase Dirimu Setelah <i>Dark Night Of The Soul</i></h1>
+<p class="subtitle">Jawab dengan jujur. Pisahkan permainan logika dan perasaan agar hasil lebih akurat.</p>
+</section>
+
+<section class="card intro" id="intro">
+<h2>Ruang refleksi</h2>
+<p>Kuis ini bukan ujian dan tidak memiliki jawaban yang paling benar atau paling spiritual. Pilih respons yang paling menggambarkan dirimu <b>saat ini</b>.</p>
+<div class="phase-pills">
+<span class="pill">🌱 Awakening</span><span class="pill">👁️ Awareness</span><span class="pill">🌿 Integration</span><span class="pill">🧭 Alignment</span><span class="pill">🤍 Union</span>
+</div>
+<p style="margin-top:18px">Hasil menggambarkan kecenderungan reflektif dari jawabanmu, bukan diagnosis psikologis dan bukan ukuran tingkat spiritual.</p>
+<button class="primary" id="startBtn" style="margin-top:12px">Mulai Kuis</button>
+</section>
+
+<section class="quiz card" id="quiz">
+<div class="quiz-head">
+<div class="progress-row"><span id="counter">Pertanyaan 1 dari 25</span><span id="pct">0%</span></div>
+<div class="progress"><span id="progress"></span></div>
+</div>
+<div class="question-card">
+<div class="question-number" id="qnum">Pertanyaan 01</div>
+<div class="question" id="question"></div>
+<div class="options" id="options"></div>
+<div class="nav">
+<button class="secondary" id="backBtn">Kembali</button>
+<button class="primary" id="nextBtn">Lanjut</button>
+</div>
+</div>
+</section>
+
+<section class="result card" id="result">
+<div class="result-badge" id="resultIcon"></div>
+<div class="result-label">Fase Dominan</div>
+<div class="result-title" id="resultTitle"></div>
+<div class="result-text" id="resultText"></div>
+
+<div class="scores">
+<h2 style="font-size:21px">Peta Kecenderungan</h2>
+<div id="scoreBars"></div>
+</div>
+
+<div class="support" id="supportText"></div>
+<div class="disclaimer">Hasil ini adalah refleksi pribadi berdasarkan pilihanmu dalam kuis. Ia bukan diagnosis psikologis, penilaian klinis, atau ukuran objektif tingkat spiritual seseorang. Seseorang dapat memiliki kualitas beberapa fase sekaligus.</div>
+<div class="actions">
+<button class="secondary" id="repeatBtn">Ulangi Kuis</button>
+<button class="primary" id="homeBtn">Mulai dari Awal</button>
+</div>
+</section>
+
+<footer class="brand">
+<div class="infinity">∞</div>
+<div>Lucent Alchemist</div>
+</footer>
+</main>
+
+<script>
+const quiz = [{"q": "Saat melihat orang lain berbeda pendapat denganmu, apa respons pertamamu?", "options": [{"text": "Aku mulai bertanya mengapa perbedaan itu begitu mengusikku.", "phase": "Awakening"}, {"text": "Aku memilih tetap berdialog dengan cara yang sesuai nilai dan batas diriku.", "phase": "Alignment"}, {"text": "Aku mencoba menerapkan kebiasaan mendengar sebelum merespons.", "phase": "Integration"}, {"text": "Aku bisa menerima perbedaan tanpa merasa perlu menang atau kehilangan diriku.", "phase": "Union"}, {"text": "Aku mulai sadar bahwa pandanganku tidak selalu satu-satunya cara melihat sesuatu.", "phase": "Awareness"}]}, {"q": "Saat melihat seseorang disakiti oleh orang terdekatnya, apa responsmu?", "options": [{"text": "Aku bisa berempati tanpa larut atau merasa harus menyelamatkan semua orang.", "phase": "Union"}, {"text": "Aku membantu sebatas yang mampu kulakukan dan tidak mengambil alih hidupnya.", "phase": "Integration"}, {"text": "Aku memperhatikan emosi dan dorongan dalam diriku ketika melihatnya.", "phase": "Awareness"}, {"text": "Kejadian itu membuatku mulai mempertanyakan pola hubungan yang selama ini kuanggap biasa.", "phase": "Awakening"}, {"text": "Aku memilih bentuk bantuan yang tetap menghormati batas dan kebutuhanku.", "phase": "Alignment"}]}, {"q": "Saat melihat orang lain hidup dalam kemewahan, apa respons pertamamu?", "options": [{"text": "Aku dapat menghargai keberhasilan mereka tanpa merasa nilainya mengurangi nilaiku.", "phase": "Union"}, {"text": "Aku mulai sadar bahwa keinginanku tentang hidup mungkin perlu kuperiksa kembali.", "phase": "Awareness"}, {"text": "Aku menjadikan keberhasilan orang lain sebagai informasi tentang arah yang memang kuinginkan.", "phase": "Alignment"}, {"text": "Aku menggunakan rasa itu untuk mengenali kebutuhan dan keinginanku lalu menyalurkannya dengan sehat.", "phase": "Integration"}, {"text": "Aku mulai mempertanyakan mengapa kehidupan mereka memunculkan rasa kurang dalam diriku.", "phase": "Awakening"}]}, {"q": "Saat ada orang meminta tolong padamu, apa responsmu?", "options": [{"text": "Aku mulai menyadari bahwa keinginanku menolong terkadang muncul karena ingin merasa dibutuhkan.", "phase": "Awakening"}, {"text": "Aku belajar membantu tanpa mengorbankan tenaga dan batas diriku.", "phase": "Integration"}, {"text": "Aku memilih bantuan yang benar-benar mampu dan ingin kuberikan.", "phase": "Alignment"}, {"text": "Aku mulai mempertanyakan kebiasaanku selalu mengatakan iya.", "phase": "Awareness"}, {"text": "Aku bisa membantu dengan tulus tanpa harus menjadi penyelamat atau merasa bersalah saat menolak.", "phase": "Union"}]}, {"q": "Saat tiba-tiba kehilangan jalur keuanganmu yang lama, apa responsmu?", "options": [{"text": "Aku mulai menyadari seberapa besar rasa aman diriku bergantung pada jalur tersebut.", "phase": "Awakening"}, {"text": "Aku mulai mencari alternatif sambil menerapkan cara pengelolaan yang lebih realistis.", "phase": "Integration"}, {"text": "Aku memilih membangun sumber penghasilan yang lebih sesuai dengan arah hidupku.", "phase": "Alignment"}, {"text": "Kejadian itu membuatku mempertanyakan arah hidup dan cara lamaku mencari penghasilan.", "phase": "Awareness"}, {"text": "Aku tetap berusaha tanpa menjadikan satu sumber uang sebagai satu-satunya dasar rasa amanku.", "phase": "Union"}]}, {"q": "Saat kamu harus mengeluarkan uangmu, apa responsmu?", "options": [{"text": "Aku menggunakan uang sesuai prioritas dan nilai hidup yang kupilih.", "phase": "Alignment"}, {"text": "Aku belajar membedakan kebutuhan, keinginan, dan keputusan impulsif.", "phase": "Integration"}, {"text": "Aku bisa menggunakan uang tanpa menjadikan jumlahnya sebagai ukuran harga diri atau keamanan batinku.", "phase": "Union"}, {"text": "Aku mulai menyadari bahwa caraku memandang uang mungkin perlu berubah.", "phase": "Awareness"}, {"text": "Aku mulai mengamati ketakutan dan pikiran yang muncul ketika uang keluar.", "phase": "Awakening"}]}, {"q": "Saat tiba-tiba pasanganmu berlalu darimu tanpa alasan yang pasti, apa responsmu?", "options": [{"text": "Aku tetap bisa merasakan kehilangan tanpa kehilangan hubungan dengan diriku sendiri.", "phase": "Union"}, {"text": "Aku memilih hubungan dan perilaku yang lebih sesuai dengan kebutuhan serta nilaiku.", "phase": "Alignment"}, {"text": "Aku belajar mengubah cara mencintai dan menjaga batas setelah memahami pola tersebut.", "phase": "Integration"}, {"text": "Aku mulai melihat luka, ketakutan, dan pola keterikatanku sendiri.", "phase": "Awareness"}, {"text": "Kejadian itu membuatku mulai mempertanyakan banyak hal tentang diriku dan hubungan ini.", "phase": "Awakening"}]}, {"q": "Saat ada orang lain membicarakan tentang khodam atau agama, apa responsmu?", "options": [{"text": "Aku memeriksa informasi dan membandingkannya sebelum mengambil sikap.", "phase": "Integration"}, {"text": "Aku bisa berbeda keyakinan tanpa perlu merendahkan orang lain atau merasa terancam.", "phase": "Union"}, {"text": "Aku mengamati mengapa topik itu memunculkan reaksi tertentu dalam diriku.", "phase": "Awareness"}, {"text": "Aku memilih keyakinan berdasarkan pemahaman yang telah kuolah sendiri.", "phase": "Alignment"}, {"text": "Aku mulai tertarik mempertanyakan kembali apa yang selama ini kupercaya.", "phase": "Awakening"}]}, {"q": "Saat ada orang yang memiliki kemampuan yang sama denganmu, apa responsmu?", "options": [{"text": "Keberadaannya membuatku mulai menyadari rasa takut tersaingi dalam diriku.", "phase": "Awakening"}, {"text": "Aku mulai mempertanyakan mengapa aku merasa harus menjadi yang paling unggul.", "phase": "Awareness"}, {"text": "Aku bisa menghargai kemampuan orang lain tanpa merasa nilai diriku berkurang.", "phase": "Union"}, {"text": "Aku memilih berkompetisi atau berkolaborasi dengan cara yang sesuai nilai diriku.", "phase": "Alignment"}, {"text": "Aku menggunakan keberadaan orang itu sebagai kesempatan belajar atau berkembang.", "phase": "Integration"}]}, {"q": "Saat menerima uang dalam jumlah lebih dari biasanya, apa responsmu?", "options": [{"text": "Aku mulai memperhatikan emosi dan rasa aman yang muncul ketika menerima uang.", "phase": "Awakening"}, {"text": "Aku merencanakan penggunaan uang itu dengan sadar.", "phase": "Integration"}, {"text": "Aku dapat menerima kelimpahan tanpa menjadikannya sumber utama harga diriku.", "phase": "Union"}, {"text": "Aku mulai menyadari bahwa uang ternyata sangat memengaruhi rasa amanku.", "phase": "Awareness"}, {"text": "Aku mengarahkannya pada prioritas yang mendukung kehidupan yang ingin kubangun.", "phase": "Alignment"}]}, {"q": "Ketika seseorang mengkritik dirimu dengan cukup keras, apa responsmu?", "options": [{"text": "Aku menentukan mana yang perlu kuterima dan mana yang tidak sesuai dengan batas serta nilainya.", "phase": "Alignment"}, {"text": "Kritik itu membuatku mulai mempertanyakan cara pandangku terhadap diriku sendiri.", "phase": "Awareness"}, {"text": "Aku mulai melihat bahwa kritik tersebut membangkitkan bagian diriku yang perlu diperhatikan.", "phase": "Awakening"}, {"text": "Aku bisa menerima masukan tanpa membiarkannya menentukan nilai diriku.", "phase": "Union"}, {"text": "Aku memilah kritik dan memperbaiki bagian yang memang perlu diperbaiki.", "phase": "Integration"}]}, {"q": "Ketika rencana yang sudah kamu susun tiba-tiba tidak berjalan sesuai keinginan, apa yang biasanya terjadi?", "options": [{"text": "Kegagalan rencana itu membuatku mulai mempertanyakan arah yang selama ini kuanggap pasti.", "phase": "Awareness"}, {"text": "Aku mengevaluasi apakah arah tersebut masih sesuai dengan hidup yang ingin kubangun.", "phase": "Alignment"}, {"text": "Aku dapat tetap memiliki arah tanpa harus memaksa kehidupan mengikuti satu skenario.", "phase": "Union"}, {"text": "Aku mulai menyadari betapa kuat kebutuhanku untuk mengendalikan hasil.", "phase": "Awakening"}, {"text": "Aku mencari pilihan lain dan menyesuaikan langkah nyata.", "phase": "Integration"}]}, {"q": "Ketika kamu menyadari bahwa dirimu pernah menyakiti seseorang, apa yang kamu lakukan?", "options": [{"text": "Aku memilih cara berhubungan yang lebih sesuai dengan nilai yang ingin kuhidupi.", "phase": "Alignment"}, {"text": "Aku mulai melihat pola dalam diriku yang membuatku bertindak seperti itu.", "phase": "Awakening"}, {"text": "Kesadaran itu membuatku mulai mempertanyakan cara lama dalam memperlakukan orang.", "phase": "Awareness"}, {"text": "Aku bisa bertanggung jawab tanpa harus membenci diriku sendiri.", "phase": "Union"}, {"text": "Aku meminta maaf, memperbaiki dampak, dan berusaha tidak mengulanginya.", "phase": "Integration"}]}, {"q": "Saat kamu sedang sendirian dan tidak ada orang yang menghubungimu, bagaimana perasaanmu?", "options": [{"text": "Aku menggunakan kesendirian untuk mendengar kebutuhan dan arah hidupku.", "phase": "Alignment"}, {"text": "Aku tetap merasa utuh meskipun sedang tidak mendapatkan perhatian orang lain.", "phase": "Union"}, {"text": "Aku mulai menyadari bahwa aku perlu mengenal diriku di luar kehadiran orang lain.", "phase": "Awareness"}, {"text": "Aku belajar menikmati waktu sendiri dan mengelola kebutuhan akan koneksi.", "phase": "Integration"}, {"text": "Kesunyian membuatku mulai menyadari hal-hal yang biasanya kututupi dengan kesibukan.", "phase": "Awakening"}]}, {"q": "Ketika seseorang yang pernah menyakitimu meminta kesempatan kedua, apa yang kamu lakukan?", "options": [{"text": "Situasi itu membuatku mempertanyakan apakah keinginanku kembali berasal dari cinta atau takut kehilangan.", "phase": "Awareness"}, {"text": "Aku menentukan batas berdasarkan kebutuhan dan nilai yang sekarang kupegang.", "phase": "Alignment"}, {"text": "Aku mempertimbangkan perubahan nyata sebelum memberi kesempatan.", "phase": "Integration"}, {"text": "Aku mulai melihat kembali pola hubungan kami dan mengapa aku masih terikat.", "phase": "Awakening"}, {"text": "Aku bisa memaafkan tanpa merasa wajib memberikan kembali akses ke hidupku.", "phase": "Union"}]}, {"q": "Ketika sesuatu yang sangat kamu inginkan belum juga terjadi, apa responsmu?", "options": [{"text": "Aku tetap memiliki keinginan tanpa menjadikannya syarat untuk merasa berharga.", "phase": "Union"}, {"text": "Aku mulai memperhatikan mengapa keinginan itu begitu kuat dan apa yang sebenarnya kucari.", "phase": "Awakening"}, {"text": "Aku tetap berusaha sambil menyesuaikan strategi dan menerima ketidakpastian.", "phase": "Integration"}, {"text": "Aku mengevaluasi apakah keinginan itu masih selaras dengan arah hidupku.", "phase": "Alignment"}, {"text": "Penundaan itu membuatku mulai mempertanyakan apakah tujuan tersebut memang masih kuinginkan.", "phase": "Awareness"}]}, {"q": "Ketika kamu menyadari bahwa selama ini kamu memiliki pola yang berulang dalam hubungan, apa yang kamu lakukan?", "options": [{"text": "Aku mulai menyadari bahwa ada sesuatu dalam diriku yang terus mengulangi pola tersebut.", "phase": "Awakening"}, {"text": "Kesadaran itu membuatku mulai mempertanyakan mengapa pola tersebut selalu terasa familiar.", "phase": "Awareness"}, {"text": "Aku memilih hubungan berdasarkan nilai dan kebutuhan yang sekarang kupahami.", "phase": "Alignment"}, {"text": "Aku mengubah cara memilih, berkomunikasi, dan menetapkan batas.", "phase": "Integration"}, {"text": "Aku mampu melihat bagianku tanpa harus mencari siapa yang sepenuhnya salah.", "phase": "Union"}]}, {"q": "Ketika seseorang berhasil melakukan sesuatu yang selama ini kamu perjuangkan, apa yang paling kamu rasakan?", "options": [{"text": "Aku menjadikan keberhasilan itu sebagai informasi tentang arah yang ingin kupilih.", "phase": "Alignment"}, {"text": "Aku mulai menyadari rasa kurang atau iri yang muncul dalam diriku.", "phase": "Awakening"}, {"text": "Aku dapat menghargai keberhasilannya tanpa merasa keberhasilannya mengurangi nilaiku.", "phase": "Union"}, {"text": "Aku menggunakan rasa tersebut untuk mengenali apa yang perlu kulakukan dalam hidupku.", "phase": "Integration"}, {"text": "Keberhasilan itu membuatku mulai mempertanyakan definisiku tentang sukses.", "phase": "Awareness"}]}, {"q": "Ketika kamu menyadari bahwa suatu keyakinan yang selama ini kamu pegang ternyata tidak lagi sesuai dengan dirimu, apa yang kamu lakukan?", "options": [{"text": "Aku bisa melepaskan keyakinan lama tanpa membenci diriku yang dulu pernah mempercayainya.", "phase": "Union"}, {"text": "Aku berani memilih keyakinan yang lebih sesuai dengan nilai dan pemahamanku.", "phase": "Alignment"}, {"text": "Aku mulai terbuka pada kemungkinan bahwa cara pandang lamaku perlu berubah.", "phase": "Awareness"}, {"text": "Aku mulai mempertanyakan dari mana keyakinan itu berasal.", "phase": "Awakening"}, {"text": "Aku mempelajari dan menguji pemahaman baru sebelum menerapkannya.", "phase": "Integration"}]}, {"q": "Ketika hidupmu mulai berubah dan kamu merasa tidak lagi menjadi dirimu yang dulu, apa yang kamu rasakan?", "options": [{"text": "Aku tidak harus mempertahankan versi lama diriku agar tetap merasa utuh.", "phase": "Union"}, {"text": "Aku mulai memilih kehidupan yang lebih sesuai dengan diriku sekarang.", "phase": "Alignment"}, {"text": "Aku belajar membawa pemahaman baru itu ke cara hidup sehari-hari.", "phase": "Integration"}, {"text": "Aku mulai melihat bagian-bagian lama diriku yang sedang berubah.", "phase": "Awakening"}, {"text": "Perubahan itu membuatku mulai mempertanyakan siapa diriku sebenarnya.", "phase": "Awareness"}]}, {"q": "Ketika sesuatu yang kamu lakukan tidak mendapatkan apresiasi dari orang lain, apa yang paling sering kamu rasakan?", "options": [{"text": "Aku mulai mempertanyakan mengapa penghargaan dari luar begitu menentukan perasaanku.", "phase": "Awareness"}, {"text": "Aku belajar tetap menghargai hasil usahaku sendiri.", "phase": "Integration"}, {"text": "Aku tidak merasa kehilangan nilai diriku hanya karena tidak dilihat atau dipuji.", "phase": "Union"}, {"text": "Aku mulai menyadari betapa pentingnya pengakuan orang lain bagiku.", "phase": "Awakening"}, {"text": "Aku memilih melakukan sesuatu karena sesuai dengan nilai dan tujuan yang kuanggap penting.", "phase": "Alignment"}]}, {"q": "Ketika seseorang yang kamu sayangi memiliki sisi yang tidak sesuai dengan harapanmu, apa responsmu?", "options": [{"text": "Aku mulai menyadari bahwa harapanku terhadap dirinya mungkin memengaruhi caraku melihatnya.", "phase": "Awakening"}, {"text": "Aku belajar melihat sisi yang kusukai dan tidak kusukai secara lebih utuh.", "phase": "Integration"}, {"text": "Aku bisa menerima seseorang tanpa merasa harus mengubahnya, sekaligus tetap bebas memilih apakah hubungan itu ingin kujalani.", "phase": "Union"}, {"text": "Aku menentukan apakah hubungan tersebut masih sesuai dengan batas dan nilai yang kupegang.", "phase": "Alignment"}, {"text": "Aku mulai mempertanyakan mengapa aku ingin dia menjadi seperti yang kuharapkan.", "phase": "Awareness"}]}, {"q": "Ketika kamu sedang berada dalam masalah besar, kepada siapa atau apa kamu paling banyak mencari jawaban?", "options": [{"text": "Aku membuat keputusan berdasarkan nilai, kondisi nyata, dan arah yang kupilih.", "phase": "Alignment"}, {"text": "Aku mulai mempertanyakan mengapa aku sulit mempercayai penilaianku sendiri.", "phase": "Awareness"}, {"text": "Aku mampu mempercayai diriku tanpa menutup diri dari masukan dan kenyataan.", "phase": "Union"}, {"text": "Aku mulai menyadari bahwa aku sering mencari kepastian dari luar.", "phase": "Awakening"}, {"text": "Aku mencari informasi lalu mengolahnya sebelum mengambil keputusan.", "phase": "Integration"}]}, {"q": "Ketika kamu kembali melakukan kesalahan atau pola lama yang sebenarnya sudah kamu sadari, apa responsmu?", "options": [{"text": "Aku mengevaluasi dan mencoba cara baru agar tidak terus mengulanginya.", "phase": "Integration"}, {"text": "Aku menyesuaikan kebiasaan dan pilihan agar lebih sesuai dengan perubahan yang kuinginkan.", "phase": "Alignment"}, {"text": "Aku mulai menyadari bahwa mengetahui suatu pola tidak otomatis membuatku langsung berubah.", "phase": "Awareness"}, {"text": "Aku mulai memahami pemicu yang membuat pola itu muncul kembali.", "phase": "Awakening"}, {"text": "Aku tidak membenci diriku ketika jatuh lagi, tetapi tetap bertanggung jawab untuk bangkit.", "phase": "Union"}]}, {"q": "Jika kamu harus menggambarkan keadaan dirimu saat ini, mana yang paling mendekati?", "options": [{"text": "Aku semakin mampu hadir sebagai diriku tanpa merasa harus menolak bagian-bagian diriku.", "phase": "Union"}, {"text": "Aku mulai melihat diriku dan kehidupanku dengan cara yang berbeda dari sebelumnya.", "phase": "Awareness"}, {"text": "Aku memahami banyak hal tentang diriku dan sedang belajar menerapkannya.", "phase": "Integration"}, {"text": "Aku semakin tahu apa yang sesuai dan tidak sesuai denganku lalu mulai hidup berdasarkan pemahaman itu.", "phase": "Alignment"}, {"text": "Aku merasa banyak hal dalam hidupku sedang dipertanyakan dan dibongkar.", "phase": "Awakening"}]}];
+const phases = ["Awakening", "Awareness", "Integration", "Alignment", "Union"];
+const phaseInfo = {"Awakening": {"name": "Bangkit", "icon": "🌱"}, "Awareness": {"name": "Menyadari", "icon": "👁️"}, "Integration": {"name": "Menerapkan", "icon": "🌿"}, "Alignment": {"name": "Selaras", "icon": "🧭"}, "Union": {"name": "Bersatu", "icon": "🤍"}};
+const descriptions = {"Awakening": "Kamu sedang berada pada fase ketika sesuatu di dalam dirimu mulai terbangun. Cara lama dalam melihat hidup, hubungan, keyakinan, atau dirimu sendiri mungkin mulai terasa tidak lagi cukup.\n\nKebangkitan bukan berarti kamu sudah memiliki semua jawaban. Justru sering kali ia hadir sebagai pertanyaan, kegelisahan, atau dorongan untuk melihat hidup dengan cara yang berbeda.\n\nYang sedang kamu pelajari adalah memberi ruang pada perubahan tanpa memaksa dirimu segera memahami semuanya.\n\nTantangan fase ini adalah jangan menjadikan kebingungan sebagai tanda bahwa kamu gagal. Kamu sedang membuka ruang bagi pemahaman baru.\n\nPesan untukmu: Tidak apa-apa jika kamu belum tahu harus ke mana. Terkadang kesadaran pertama memang datang sebagai pertanyaan.", "Awareness": "Kamu mulai melihat dirimu dengan lebih jernih. Pola hubungan, emosi, kebutuhan, luka, dan cara bereaksi yang dulu terasa otomatis mulai bisa kamu amati.\n\nKamu mulai mampu melihat hubungan antara pengalaman luar dan dunia batinmu.\n\nYang sedang kamu pelajari adalah membedakan apa yang kamu rasakan, pikirkan, dan benar-benar kamu pilih.\n\nTantangan fase ini adalah jangan berhenti pada analisis. Menyadari adalah pintu, bukan seluruh perjalanan.\n\nPesan untukmu: Kamu tidak harus langsung memperbaiki semua yang kamu lihat. Melihat dengan jujur sudah merupakan perubahan.", "Integration": "Kamu mulai membawa kesadaran dari pikiran ke kehidupan nyata. Pemahamanmu mulai terlihat melalui pilihan, kebiasaan, komunikasi, batas, dan cara menghadapi situasi.\n\nKamu mungkin masih kembali ke pola lama. Itu tidak otomatis berarti prosesmu gagal. Integrasi berlangsung melalui praktik, pengalaman, koreksi, dan pengulangan.\n\nYang sedang kamu pelajari adalah menjadikan kesadaran sebagai tindakan yang konsisten.\n\nTantangan fase ini adalah tidak menuntut dirimu berubah sempurna dalam satu waktu.\n\nPesan untukmu: Kamu tidak perlu membuktikan bahwa kamu sudah berubah. Biarkan perubahan itu terlihat dari cara kamu menjalani hidup.", "Alignment": "Kamu semakin jelas tentang apa yang sesuai dan tidak sesuai dengan dirimu. Pilihanmu mulai lebih dipengaruhi nilai, kebutuhan, batas, dan arah hidup daripada sekadar dorongan sesaat.\n\nKeselarasan bukan berarti semua hal menjadi mudah. Kamu tetap bisa kehilangan, kecewa, atau ragu. Bedanya, kamu semakin mampu kembali bertanya apakah pilihanmu sesuai dengan dirimu.\n\nYang sedang kamu pelajari adalah berani memilih yang selaras meskipun tidak selalu paling mudah atau paling disukai orang lain.\n\nTantangan fase ini adalah tidak mengira bahwa hidup selaras berarti hidup tanpa konflik.\n\nPesan untukmu: Kamu tidak harus memiliki semua jawaban. Berani hidup sesuai dengan apa yang sudah kamu pahami sudah merupakan bentuk keselarasan.", "Union": "Kamu menunjukkan kecenderungan untuk semakin mampu hadir sebagai diri yang utuh. Pikiran, perasaan, kebutuhan, kekuatan, dan luka tidak harus selalu saling berperang.\n\nUnion bukan berarti kamu tidak pernah takut, sedih, marah, kecewa, atau bingung. Kamu tetap manusia. Yang berubah adalah hubunganmu dengan pengalaman-pengalaman itu: kamu semakin tidak perlu meninggalkan dirimu sendiri ketika hidup terasa berat.\n\nYang sedang kamu pelajari adalah menerima diri tanpa menjadikan penerimaan sebagai alasan untuk berhenti bertumbuh.\n\nTantangan fase ini adalah tetap membumi dan tidak menjadikan perjalanan batin sebagai alasan merasa lebih tinggi dari orang lain.\n\nPENTING: Union bukan puncak yang harus dikejar dan bukan status spiritual yang harus dipertahankan. Seseorang bisa mengalami kualitas Union dalam satu bagian kehidupan sementara bagian lain masih berada dalam proses.\n\nPesan untukmu: Kamu tidak perlu menjadi sempurna untuk menjadi utuh. Terkadang menjadi utuh berarti berhenti meninggalkan bagian dirimu sendiri."};
+
+let current = 0;
+let answers = Array(quiz.length).fill(null);
+
+const $ = id => document.getElementById(id);
+const intro=$("intro"), quizBox=$("quiz"), result=$("result");
+
+function startQuiz() {
+  current=0;
+  answers=Array(quiz.length).fill(null);
+  intro.style.display="none";
+  result.style.display="none";
+  quizBox.style.display="block";
+  render();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function render() {
+  const item=quiz[current];
+  $("counter").textContent=`Pertanyaan ${current+1} dari ${quiz.length}`;
+  $("pct").textContent=`${Math.round(((current+1)/quiz.length)*100)}%`;
+  $("progress").style.width=`${((current+1)/quiz.length)*100}%`;
+  $("qnum").textContent=`Pertanyaan ${String(current+1).padStart(2,"0")}`;
+  $("question").textContent=item.q;
+  const letters=["A","B","C","D","E"];
+  $("options").innerHTML="";
+  item.options.forEach((opt,i)=>{
+    const label=document.createElement("label");
+    label.className="option"+(answers[current]===i?" selected":"");
+    label.innerHTML=`<input type="radio" name="answer" value="${i}"><span class="letter">${letters[i]}</span><span class="option-text">${escapeHtml(opt.text)}</span>`;
+    label.addEventListener("click",()=>select(i));
+    $("options").appendChild(label);
+  });
+  $("backBtn").disabled=current===0;
+  $("nextBtn").textContent=current===quiz.length-1?"Lihat Hasil":"Lanjut";
+}
+
+function escapeHtml(str) {
+ return str.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+
+function select(i) {
+ answers[current]=i;
+ [...document.querySelectorAll(".option")].forEach((el,n)=>el.classList.toggle("selected",n===i));
+}
+
+$("nextBtn").addEventListener("click",()=>{
+ if(answers[current]===null) {
+   $("options").animate([{transform:"translateX(-5px)"},{transform:"translateX(5px)"},{transform:"translateX(0)"}],{duration:180});
+   return;
+ }
+ if(current<quiz.length-1) { current++; render(); window.scrollTo({top:0,behavior:"smooth"}); }
+ else showResult();
+});
+$("backBtn").addEventListener("click",()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:"smooth"})}});
+$("startBtn").addEventListener("click",startQuiz);
+$("repeatBtn").addEventListener("click",startQuiz);
+$("homeBtn").addEventListener("click",()=>{
+ result.style.display="none"; quizBox.style.display="none"; intro.style.display="block"; window.scrollTo({top:0,behavior:"smooth"});
+});
+
+function showResult() {
+ const scores=Object.fromEntries(phases.map(p=>[p,0]));
+ answers.forEach((ans,i)=>{ if(ans!==null) scores[quiz[i].options[ans].phase]++; });
+ const sorted=[...phases].sort((a,b)=>scores[b]-scores[a]);
+ const top=sorted[0], second=sorted[1];
+ const gap=scores[top]-scores[second];
+ const tied=gap===0;
+ const close=gap<=1;
+ const info=phaseInfo[top];
+
+ $("resultIcon").textContent=info.icon;
+ $("resultTitle").textContent=`${top} — ${info.name}`;
+ $("resultText").innerHTML=descriptions[top].split("\n\n").map(p=>`<p>${escapeHtml(p)}</p>`).join("");
+
+ const max=Math.max(...Object.values(scores),1);
+ $("scoreBars").innerHTML=phases.map(p=>`<div class="score-row">
+   <div class="score-top"><span>${phaseInfo[p].icon} ${p} — ${phaseInfo[p].name}</span><b>${scores[p]}</b></div>
+   <div class="bar"><span style="width:${(scores[p]/max)*100}%"></span></div>
+ </div>`).join("");
+
+ if(tied || close) {
+   $("supportText").innerHTML=`<b>Dua kecenderungan yang sama kuat:</b> ${top} dan ${second} sama-sama memberi warna kuat pada jawabanmu. Kamu tidak perlu memilih salah satunya sebagai “lebih tinggi”. Kualitas beberapa fase dapat hadir bersamaan dan dapat berbeda menurut area kehidupan.`;
+ } else {
+   $("supportText").innerHTML=`<b>Fase Pendamping:</b> ${phaseInfo[second].icon} ${second} — ${phaseInfo[second].name} (${
+     scores[second]
+   } pilihan). Ini adalah kecenderungan pendamping dalam refleksimu, bukan tingkat yang lebih rendah atau lebih tinggi.`;
+ }
+
+ quizBox.style.display="none"; result.style.display="block"; window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
